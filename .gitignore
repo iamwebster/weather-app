@@ -1,0 +1,4 @@
+.env
+forecast_app/__pycache__/*
+weather/__pycache__/*
+forecast_app/migrations/__pycache__/*

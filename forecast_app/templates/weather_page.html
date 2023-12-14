@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container py-4 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-7 col-xl-8">
+            <form class="d-flex mb-4" method="post">
+                {% csrf_token %}
+                <input class="form-control p-3" placeholder="Find city..." aria-label="Search"
+                    style="border-radius: 25px 0 0 25px;" name="city">
+                <button class="btn btn-outline-dark" type="submit" style="border-radius: 0 25px 25px 0;">Check!</button>
+            </form>
+            {% if today.city %}
+            <div class="card mb-4" style="border-radius: 25px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between mb-0">
+                        <div>
+                            <h4 class="text-muted">{{ today.city }}, {{ today.country }}</h4>
+                            <h2 class="display-2"><strong>{{ today.temp }}°C</strong></h2>
+                            <p>Feels like: {{ today.feels_like }}°C</p>
+                        </div>
+                        <div>
+                            <img src="{% static 'icons/'|add:today.icon|add:'.png' %}" alt="{{ today.desc }}"
+                                width="150px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4" style="border-radius: 25px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-around text-center mb-0">
+                        {% for hour in hourly %}
+                        <div class="flex-column">
+                            <p class="mb-0"><strong>{{ hour.time }}</strong></p>
+                            <img src="{% static 'icons/'|add:hour.icon|add:'.png' %}" alt="{{ hour.desc }}"
+                                width="60px">
+                            <p><strong>{{ hour.temp }}°C</strong></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-around text-center mb-0">
+                        {% for frc in forecast %}
+                        <div class="flex-column">
+                            <p class="mb-0"><strong>{{ frc.day }}</strong></p>
+                            <img src="{% static 'icons/'|add:frc.icon|add:'.png' %}" alt="{{ frc.desc }}" width="60px">
+                            <p><strong>{{ frc.temp }}°C</strong></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-4 gradient-custom" style="border-radius: 25px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between mb-0">
+                        <h2>{{ message }}</h2>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
