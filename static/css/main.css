@@ -1,0 +1,21 @@
+body {
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
+.card {
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#form {
+    border-radius: 25px 0 0 25px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.btn {
+    border-radius: 0 25px 25px 0;
+}

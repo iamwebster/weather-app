@@ -35,6 +35,9 @@ def get_today_weather(url: str, city: str, api_key: str) -> dict:
     weather_dict["country"] = weather_data_json["sys"]["country"]
     weather_dict["temp"] = round(weather_data_json["main"]["temp"], 1)
     weather_dict["feels_like"] = round(weather_data_json["main"]["feels_like"], 1)
+    weather_dict['wind'] = weather_data_json['wind']['speed']
+    weather_dict['pressure'] = weather_data_json['main']['pressure']
+    weather_dict['humidity'] = weather_data_json['main']['humidity']
     weather_dict["desc"] = weather_data_json["weather"][0]["description"]
     weather_dict["icon"] = weather_data_json["weather"][0]["icon"]
 
