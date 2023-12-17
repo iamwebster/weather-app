@@ -6,6 +6,7 @@ from datetime import datetime
 
 
 load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
 
 def index(request):
@@ -13,7 +14,6 @@ def index(request):
         forecast_url = "https://api.openweathermap.org/data/2.5/forecast?q={}&appid={}&units=metric"
         weather_url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric"
         city = request.POST["city"]
-        API_KEY = os.getenv("API_KEY")
         try:
             today = get_today_weather(weather_url, city, API_KEY)
             forecast = get_forecast(forecast_url, city, API_KEY)
